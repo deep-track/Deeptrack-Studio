@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deeptrack Studio — Applied AI Engineering &amp; Consulting</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16324A;
+    --accent:#1A6EBD;
+    --bar-light:#80C5EC;
+    --bar-mid:#3FACE4;
+    --bar-deep:#0191D8;
+    --body-grey:#666666;
+    --muted-grey:#888888;
+    --tint:#F2F4F6;
+    --white:#FFFFFF;
+    --radius:14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--body-grey);
+    background:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Poppins', sans-serif;
+    color:var(--navy);
+    font-weight:600;
+    line-height:1.2;
+  }
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'Inter', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:11.5px;
+    font-weight:600;
+    color:var(--muted-grey);
+  }
+  section{scroll-margin-top:90px;}
+
+  /* ===== BAR MARK — signature element ===== */
+  .barmark{display:inline-flex; align-items:flex-end; gap:3px; height:22px;}
+  .barmark span{width:5px; border-radius:2px; display:block; transform:skewX(-12deg);}
+  .barmark span:nth-child(1){height:40%; background:var(--bar-light);}
+  .barmark span:nth-child(2){height:68%; background:var(--bar-mid);}
+  .barmark span:nth-child(3){height:100%; background:var(--bar-deep);}
+
+  /* ===== NAV ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid #E7EBEE;
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{display:flex; align-items:center; gap:10px;}
+  .logo-text{font-family:'Poppins',sans-serif; font-size:19px; font-weight:700; color:var(--navy); letter-spacing:-0.01em;}
+  .logo-text span{font-weight:500; color:#8A96A0;}
+  .logo-sub{
+    font-size:9.5px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--muted-grey); margin-top:1px;
+  }
+  .logo-stack{display:flex; flex-direction:column;}
+  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links a{
+    font-size:14.5px; font-weight:500; color:var(--navy); opacity:0.75;
+    transition:opacity .15s ease;
+  }
+  .nav-links a:hover{opacity:1;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:11px 22px; border-radius:8px; font-size:14.5px; font-weight:600;
+    font-family:'Inter',sans-serif; cursor:pointer; transition:all .15s ease; white-space:nowrap;
+  }
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{background:#155a99;}
+  .btn-ghost{background:transparent; color:var(--navy); border:1.5px solid #D3DAE0;}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-on-navy{background:var(--white); color:var(--navy);}
+  .btn-on-navy:hover{background:var(--bar-light);}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; overflow:hidden;
+    min-height:88vh;
+    display:flex; align-items:center;
+    padding:150px 0 90px;
+  }
+  .hero-bg-video{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; z-index:0;
+  }
+  .hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(9,26,42,0.72) 0%, rgba(9,26,42,0.5) 40%, rgba(9,26,42,0.85) 100%);
+  }
+  .hero-content{position:relative; z-index:2; max-width:640px;}
+  .hero .eyebrow{color:var(--bar-light);}
+  .hero h1{
+    font-size:clamp(34px, 4.4vw, 56px);
+    letter-spacing:-0.02em;
+    margin:16px 0 22px;
+    color:#FFFFFF;
+  }
+  .hero p.lede{
+    font-size:17.5px; color:#D9E3EA; max-width:520px; margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:14px; margin-bottom:44px;}
+  .hero-stats{display:flex; gap:36px; padding-top:28px; border-top:1px solid rgba(255,255,255,0.18);}
+  .hero-stats div{display:flex; flex-direction:column;}
+  .hero-stats strong{font-family:'Poppins',sans-serif; font-size:22px; color:#FFFFFF; font-weight:700;}
+  .hero-stats span{font-size:12.5px; color:#B9C6D0; margin-top:2px;}
+  .hero .btn-ghost{border-color:rgba(255,255,255,0.5); color:#FFFFFF;}
+  .hero .btn-ghost:hover{border-color:var(--bar-light); color:var(--bar-light);}
+
+  .signal-caption{
+    position:absolute; left:32px; bottom:26px; z-index:2;
+    display:flex; align-items:center; gap:8px;
+  }
+  .signal-caption .dot{
+    width:7px; height:7px; border-radius:50%; background:#3FACE4;
+    box-shadow:0 0 0 4px rgba(63,172,228,0.25);
+  }
+  .signal-caption span{
+    font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.1em;
+    color:#EAF3FB; text-transform:uppercase;
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-head{max-width:560px; margin-bottom:48px;}
+  .section-head h2{font-size:clamp(26px,3vw,34px); margin-top:12px; letter-spacing:-0.015em;}
+  .section-head p{font-size:15.5px; color:var(--body-grey); margin-top:14px;}
+  .section-pad{padding:96px 0;}
+  .bg-tint{background:var(--tint);}
+
+  /* ===== SERVICES ===== */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;
+  }
+  .service-card{
+    background:var(--white); border:1px solid #E7EBEE; border-radius:var(--radius);
+    padding:30px 26px; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 30px -18px rgba(22,50,74,0.25);
+    border-color:#D3DAE0;
+  }
+  .service-card .barmark{height:26px; margin-bottom:18px;}
+  .service-card h3{font-size:16.5px; margin-bottom:9px;}
+  .service-card p{font-size:14px; color:var(--body-grey);}
+
+  /* ===== SUCCESS STORIES STRIP ===== */
+  .stories-strip{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:18px;
+  }
+  .story-card{
+    background:var(--white); border-radius:var(--radius); border:1px solid #E7EBEE;
+    padding:22px; display:flex; flex-direction:column; gap:10px;
+  }
+  .story-flag{display:flex; align-items:center;}
+  .story-flag img{
+    width:30px; height:22px; object-fit:cover; border-radius:3px;
+    box-shadow:0 0 0 1px rgba(22,50,74,0.08);
+  }
+  .story-tag{
+    font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--accent); background:rgba(26,110,189,0.08); padding:4px 9px; border-radius:20px;
+    display:inline-block; width:fit-content;
+  }
+  .story-card h4{font-size:15px; margin-top:2px;}
+  .story-card p{font-size:13px; color:var(--body-grey);}
+  .stories-link{
+    display:inline-flex; align-items:center; gap:6px; margin-top:36px;
+    font-size:14.5px; font-weight:600; color:var(--accent);
+  }
+
+  /* ===== PROCESS ===== */
+  .process-strip{
+    display:grid; grid-template-columns:repeat(6,1fr); gap:16px;
+  }
+  .process-step{position:relative; padding-top:18px;}
+  .process-step .num{
+    font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:var(--white);
+    background:var(--navy); width:28px; height:28px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .process-step h4{font-size:14.5px; margin-bottom:6px;}
+  .process-step p{font-size:12.5px; color:var(--muted-grey);}
+  .process-track{
+    position:relative;
+  }
+  .process-track::before{
+    content:''; position:absolute; top:14px; left:0; right:0; height:1px; background:#DEE4E8;
+  }
+
+  /* ===== CLOSING CTA ===== */
+  .cta-band{
+    background:var(--navy); border-radius:20px; padding:60px 56px;
+    display:flex; align-items:center; justify-content:space-between; gap:32px;
+    position:relative; overflow:hidden;
+  }
+  .cta-band::after{
+    content:''; position:absolute; right:-60px; top:-60px; width:280px; height:280px;
+    background:radial-gradient(circle, rgba(63,172,228,0.25), transparent 70%);
+  }
+  .cta-band h2{color:#fff; font-size:clamp(22px,2.6vw,30px); max-width:520px; position:relative; z-index:1;}
+  .cta-band .btn{position:relative; z-index:1; flex-shrink:0;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--tint); padding:64px 0 32px; margin-top:96px;}
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:40px;
+  }
+  .footer-col h5{
+    font-size:12px; font-weight:600; color:var(--navy); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px;
+  }
+  .footer-col a{display:block; font-size:14px; color:var(--body-grey); margin-bottom:11px;}
+  .footer-col a:hover{color:var(--accent);}
+  .footer-tagline{font-size:13px; color:var(--muted-grey); margin-top:14px; max-width:220px;}
+  .footer-bottom{
+    border-top:1px solid #E1E6EA; padding-top:24px; display:flex; justify-content:space-between;
+    font-size:12.5px; color:var(--muted-grey);
+  }
+
+  @media (max-width:900px){
+    .hero{min-height:640px; padding:120px 0 70px;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .stories-strip{grid-template-columns:repeat(2,1fr);}
+    .process-strip{grid-template-columns:repeat(3,1fr); row-gap:32px;}
+    .process-track::before{display:none;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+  }
+  @media (max-width:560px){
+    .services-grid, .stories-strip{grid-template-columns:1fr;}
+    .process-strip{grid-template-columns:1fr 1fr;}
+    .cta-band{flex-direction:column; text-align:left; padding:44px 30px;}
+    .hero-stats{flex-wrap:wrap; row-gap:18px;}
+    .footer-grid{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column; gap:8px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo">
+        <div class="logo-stack">
+          <div class="logo-text">deeptrack<span>studio</span></div>
+          <div class="logo-sub">A Subsidiary of Deeptrack Inc.</div>
+        </div>
+        <span class="barmark"><span></span><span></span><span></span></span>
+      </div>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#stories">Success Stories</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+      </div>
+      <a href="#" class="btn btn-primary">Book a Call</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <video class="hero-bg-video" autoplay muted loop playsinline>
+    <source src="assets/Elodin.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <div class="wrap hero-content">
+    <span class="eyebrow">Applied AI Consulting &amp; Engineering — Global</span>
+    <h1>AI engineering for the problems generalist vendors won't touch.</h1>
+    <p class="lede">Deeptrack Studio is Deeptrack Inc.'s applied AI engineering and consulting arm — built for projects that need real technical depth: engineering, strategy, design, executive training, and applied research.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary">Book a Call</a>
+      <a href="#stories" class="btn btn-ghost">See Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>8+</strong><span>Engagements across 3 continents</span></div>
+      <div><strong>6</strong><span>Applied AI service lines</span></div>
+      <div><strong>Nairobi</strong><span>Global delivery, local base</span></div>
+    </div>
+  </div>
+
+  <div class="signal-caption">
+    <span class="dot"></span>
+    <span>Nairobi — 21:00 EAT</span>
+  </div>
+</section>
+
+<section id="services" class="section-pad">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What We Do</span>
+      <h2>Six service lines. One engineering standard.</h2>
+      <p>Every engagement runs through the same technical bar, whether it's a model in production or a boardroom briefing.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="barmark" style="height:26px;"><span style="height:30%"></span><span style="height:65%"></span><span style="height:100%"></span></span>
+        <h3>AI Engineering</h3>
+        <p>Custom AI/ML systems built to solve real, technically demanding problems — from applied systems like Math AI to document intelligence, translation engines, and model fine-tuning.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="barmark" style="height:26px;"><span style="height:55%"></span><span style="height:80%"></span><span style="height:60%"></span></span>
+        <h3>AI Consulting &amp; Strategy</h3>
+        <p>Advisory that tells leadership where and how to actually adopt AI — readiness assessments, adoption roadmaps, and build-vs-buy calls.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="barmark" style="height:26px;"><span style="height:70%"></span><span style="height:40%"></span><span style="height:100%"></span></span>
+        <h3>AI Design &amp; Integration</h3>
+        <p>AI-native experiences, designed and shipped into real products — design systems, feature integration, and UX for AI-powered tools.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="barmark" style="height:26px;"><span style="height:40%"></span><span style="height:100%"></span><span style="height:70%"></span></span>
+        <h3>Corporate AI Training for Executives</h3>
+        <p>Hands-on AI literacy for the people making the calls — executive readiness workshops, board briefings, department upskilling.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="barmark" style="height:26px;"><span style="height:100%"></span><span style="height:55%"></span><span style="height:35%"></span></span>
+        <h3>AI for Media &amp; Motion</h3>
+        <p>Applied AI inside video, animation, and motion production — motion design, corporate training video series, synthetic and CGI media detection.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="barmark" style="height:26px;"><span style="height:60%"></span><span style="height:60%"></span><span style="height:100%"></span></span>
+        <h3>Applied Research &amp; Trust</h3>
+        <p>Research and thought leadership at the technical edge of AI trust — deepfake and synthetic-media research, symposia, technical whitepapers.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="stories" class="section-pad bg-tint">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Success Stories</span>
+      <h2>Engagements, not case study theater.</h2>
+      <p>A sample of what's shipped — across Africa, the Americas, and Asia.</p>
+    </div>
+    <div class="stories-strip">
+
+      <div class="story-card">
+        <span class="story-flag"><img src="https://flagcdn.com/60x45/bj.png" alt="Benin flag"></span>
+        <span class="story-tag">AI Engineering</span>
+        <h4>Math AI — Benin</h4>
+        <p>Applied AI system built to support mathematics learning and problem-solving. Helps students work through problems step by step with real-time guidance.</p>
+      </div>
+
+      <div class="story-card">
+        <span class="story-flag"><img src="https://flagcdn.com/60x45/us.png" alt="United States flag"></span>
+        <span class="story-tag">AI Design &amp; Integration</span>
+        <h4>Design Systems — Dallas, USA</h4>
+        <p>Built an AI-driven design system integrated into the client's product, Bundlesbets. Gave the team a consistent, scalable UI foundation across the platform.</p>
+      </div>
+
+      <div class="story-card">
+        <span class="story-flag"><img src="https://flagcdn.com/60x45/mx.png" alt="Mexico flag"></span>
+        <span class="story-tag">Applied Research &amp; Trust</span>
+        <h4>Media CGI Detection — Mexico</h4>
+        <p>Synthetic and CGI media detection engagement for a Mexico-based client. Flags manipulated footage before it reaches broadcast or publication.</p>
+      </div>
+
+      <div class="story-card">
+        <span class="story-flag"><img src="https://flagcdn.com/60x45/jp.png" alt="Japan flag"></span>
+        <span class="story-tag">AI Engineering</span>
+        <h4>Language Translation — Japan</h4>
+        <p>Amharic–Swahili–Japanese translation system built for Mitsumi. Enables accurate three-way communication across previously unsupported language pairs.</p>
+      </div>
+
+      <div class="story-card">
+        <span class="story-flag"><img src="https://flagcdn.com/60x45/sg.png" alt="Singapore flag"></span>
+        <span class="story-tag">Applied Research &amp; Trust</span>
+        <h4>Deepfake Symposium — Singapore</h4>
+        <p>Research and speaking engagement on deepfakes and synthetic media. Shared applied findings on detection with an international research audience.</p>
+      </div>
+
+      <div class="story-card">
+        <span class="story-flag"><img src="https://flagcdn.com/60x45/ae.png" alt="United Arab Emirates flag"></span>
+        <span class="story-tag">AI Engineering</span>
+        <h4>Async Agent API Service — UAE</h4>
+        <p>Design and implementation of an asynchronous agent API service for a UAE-based client. Built to handle long-running agent tasks reliably at scale.</p>
+      </div>
+
+      <div class="story-card">
+        <span class="story-flag"><img src="https://flagcdn.com/60x45/ke.png" alt="Kenya flag"></span>
+        <span class="story-tag">AI Consulting &amp; Strategy</span>
+        <h4>AI Readiness for CEOs — Kenya</h4>
+        <p>Executive AI-readiness advisory, delivered with Centric Essentials Consulting. Helped leadership teams set a clear, practical AI adoption roadmap.</p>
+      </div>
+
+    </div>
+    <a href="#" class="stories-link">See all success stories →</a>
+  </div>
+</section>
+
+<section id="process" class="section-pad">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How We Work</span>
+      <h2>Six steps. No surprises.</h2>
+      <p>The same process runs whether the engagement is two weeks or six months.</p>
+    </div>
+    <div class="process-strip process-track">
+      <div class="process-step"><div class="num">1</div><h4>Discovery Call</h4><p>We scope the problem, not the pitch.</p></div>
+      <div class="process-step"><div class="num">2</div><h4>Scoping &amp; Proposal</h4><p>Clear deliverables, timeline, and cost.</p></div>
+      <div class="process-step"><div class="num">3</div><h4>Technical Design</h4><p>Architecture reviewed and approved before we build.</p></div>
+      <div class="process-step"><div class="num">4</div><h4>Delivery</h4><p>Engineering happens in the open, with checkpoints.</p></div>
+      <div class="process-step"><div class="num">5</div><h4>Review &amp; Iteration</h4><p>We test against the real problem, not the demo.</p></div>
+      <div class="process-step"><div class="num">6</div><h4>Handover</h4><p>Documented, owned, and yours to run.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Have an AI project that's too technical for a typical vendor? Let's talk.</h2>
+      <a href="#" class="btn btn-on-navy">Book a Call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo-text">deeptrack<span>studio</span></div>
+        <p class="footer-tagline">A Subsidiary of Deeptrack Inc. — applied AI engineering and consulting, globally.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Site</h5>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#stories">Success Stories</a>
+        <a href="#process">Process</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="mailto:project@deeptrack.io">project@deeptrack.io</a>
+        <a href="tel:+254720882406">+254 720 882 406</a>
+        <a href="#">Nairobi, Kenya</a>
+      </div>
+      <div class="footer-col">
+        <h5>Book</h5>
+        <a href="#">Schedule a call →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Deeptrack Studio — a subsidiary of Deeptrack Inc.</span>
+      <span>deeptrack.io</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
