@@ -91,17 +91,17 @@ export const services: Service[] = [
 
 export const caseStudies: CaseStudy[] = [
   {
-    id: "math-ai-benin",
-    title: "Math AI",
-    location: "Benin",
+    id: "idp-banking-egypt-saudi",
+    title: "IDP — Intelligent Document Processor",
+    location: "Egypt & Saudi Arabia",
     service: "AI Engineering",
     overview:
-      "An applied AI system built to support mathematics learning and problem-solving, guiding students through problems step by step rather than only returning final answers.",
+      "An Intelligent Document Processor for banking workflows across Egypt and Saudi Arabia, designed to extract, classify, validate, and route information from high-volume financial and customer documents.",
     challenge:
-      "The work required an approach that supports method and reasoning, not only answer generation.",
+      "Banking teams need to process varied Arabic and English documents accurately while preserving review controls, auditability, data protection, and regional operating requirements across two markets.",
     delivery:
-      "A learning-oriented AI workflow designed around real-time guidance during problem solving.",
-    clientContext: "Education-focused applied AI engagement",
+      "A bank-focused document intelligence scope spanning document intake, OCR and field extraction, classification, validation rules, exception queues, human review, structured outputs, and integration into existing banking operations. The delivery plan is to be defined with the client around document types, volumes, core-banking or workflow integrations, service levels, and deployment requirements.",
+    clientContext: "Banking document intelligence project for Egypt and Saudi Arabia",
   },
   {
     id: "design-systems-dallas",
